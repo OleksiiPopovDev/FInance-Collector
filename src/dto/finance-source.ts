@@ -8,12 +8,12 @@ import {
 } from 'class-validator';
 
 export type UkrsibbankOnline = {
-  status: string;
+  status: boolean;
   date: string;
   description: string;
   account: string;
   category: string;
-  amount: string;
+  amount: number;
   currency: string;
 };
 

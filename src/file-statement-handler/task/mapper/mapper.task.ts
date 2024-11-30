@@ -1,9 +1,9 @@
-import { MapperStrategyAbstract } from './mapper-strategy.abstract';
+import { StrategyInterface } from './strategy.interface';
 
 export class MapperTask {
-  private strategy: MapperStrategyAbstract;
+  private strategy: StrategyInterface;
 
-  public setStrategy(strategy: MapperStrategyAbstract) {
+  public setStrategy(strategy: StrategyInterface) {
     this.strategy = strategy;
   }
 

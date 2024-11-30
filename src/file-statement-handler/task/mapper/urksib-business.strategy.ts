@@ -1,5 +1,5 @@
-import { MapperStrategyAbstract } from './mapper-strategy.abstract';
+import { StrategyInterface } from './strategy.interface';
 
-export class UrksibBusinessStrategy extends MapperStrategyAbstract {
+export class UrksibBusinessStrategy extends StrategyInterface {
   run(data: any): any {}
 }
