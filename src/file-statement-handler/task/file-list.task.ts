@@ -13,8 +13,8 @@ export class FileListTask {
       .readdirSync(directory)
       .map((file) => {
         const filePath = path.join(directory, file);
-        const stats = fs.statSync(filePath);
-        return { file, creationTime: stats.birthtime };
+        const fileStats = fs.statSync(filePath);
+        return { file, creationTime: fileStats.birthtime };
       })
       .sort((a, b) => a.creationTime.getTime() - b.creationTime.getTime())
       .map((item) => item.file);

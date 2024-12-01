@@ -1,4 +1,5 @@
 import { StrategyInterface } from './strategy.interface';
+import { FieldMapper } from '../../../dto/finance-source';
 
 export class MapperTask {
   private strategy: StrategyInterface;
@@ -7,7 +8,7 @@ export class MapperTask {
     this.strategy = strategy;
   }
 
-  public run(data: any) {
+  public run(data: any): FieldMapper[] {
     if (!this.strategy) {
       throw new Error('Strategy is not set');
     }

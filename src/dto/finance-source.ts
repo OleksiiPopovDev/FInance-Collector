@@ -1,48 +1,21 @@
 import {
+  IsBoolean,
+  IsDate,
   IsEnum,
   IsNotEmpty,
   IsNumber,
+  IsObject,
   IsString,
   IsUrl,
   ValidateIf,
 } from 'class-validator';
-
-export type UkrsibbankOnline = {
-  status: boolean;
-  date: string;
-  description: string;
-  account: string;
-  category: string;
-  amount: number;
-  currency: string;
-};
+import { BankListEnum } from '../enum/bank-list.enum';
+import { UkrsibbankOnline } from '../file-statement-handler/task/type/ukrsibbank-online.type';
+import { UkrsibbankBusiness } from '../file-statement-handler/task/type/ukrsibbank-business.type';
 
 export enum SourceType {
   FILE = 'file',
   API = 'api',
-}
-
-export class FinanceSource {
-  @IsNotEmpty()
-  @IsString()
-  name: string;
-
-  @IsNotEmpty()
-  @IsEnum(SourceType)
-  type: SourceType;
-
-  @ValidateIf((v) => v.type === SourceType.API)
-  @IsNotEmpty()
-  credentials: ApiCredentials;
-
-  @ValidateIf((v) => v.type === SourceType.FILE)
-  @IsNotEmpty()
-  @IsString()
-  fileFieldName: string;
-
-  @ValidateIf((v) => v.type === SourceType.FILE)
-  @IsNotEmpty()
-  mapper: FieldMapper;
 }
 
 export class ApiCredentials {
@@ -56,27 +29,55 @@ export class ApiCredentials {
 }
 
 export class FieldMapper {
-  @IsNumber()
-  @IsString()
-  status: number | string;
+  @IsNotEmpty()
+  @IsBoolean()
+  status: boolean;
+
+  @IsNotEmpty()
+  @IsDate()
+  date: Date;
 
   @IsString()
-  @IsNumber()
-  date: number | string;
+  description: string;
 
-  @IsNumber()
-  @IsNumber()
-  description: number | string;
+  @IsNotEmpty()
+  @IsString()
+  account: string;
 
+  @IsNotEmpty()
   @IsNumber()
-  @IsNumber()
-  account: number | string;
+  debit: number;
 
+  @IsNotEmpty()
   @IsNumber()
-  @IsNumber()
-  amount: number | string;
+  credit: number;
 
-  @IsNumber()
-  @IsNumber()
-  currency: number | string;
+  @IsNotEmpty()
+  @IsString()
+  currency: string;
+
+  @IsObject()
+  originSource: UkrsibbankOnline | UkrsibbankBusiness;
+}
+
+export class FinanceSource {
+  @IsNotEmpty()
+  @IsEnum(BankListEnum)
+  name: BankListEnum;
+
+  @IsNotEmpty()
+  @IsEnum(SourceType)
+  type: SourceType;
+
+  @ValidateIf((v) => v.type === SourceType.API)
+  @IsNotEmpty()
+  credentials?: ApiCredentials;
+
+  @ValidateIf((v) => v.type === SourceType.FILE)
+  @IsNotEmpty()
+  @IsString()
+  fileHash?: string;
+
+  @IsNotEmpty()
+  mapper: FieldMapper[];
 }
