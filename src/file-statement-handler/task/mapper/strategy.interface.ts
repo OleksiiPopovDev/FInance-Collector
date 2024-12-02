@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { FieldMapper } from '../../../dto/finance-source';
+import { FinanceStatementFieldSchema } from '../../database/schema/finance-statement-field.schema';
 
 @Injectable()
 export abstract class StrategyInterface {
-  abstract run(data: any[]): FieldMapper[];
+  abstract run(data: any[]): FinanceStatementFieldSchema[];
 }

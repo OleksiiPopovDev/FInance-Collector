@@ -12,11 +12,7 @@ import {
 import { BankListEnum } from '../enum/bank-list.enum';
 import { UkrsibbankOnline } from '../file-statement-handler/task/type/ukrsibbank-online.type';
 import { UkrsibbankBusiness } from '../file-statement-handler/task/type/ukrsibbank-business.type';
-
-export enum SourceType {
-  FILE = 'file',
-  API = 'api',
-}
+import { SourceType } from '../file-statement-handler/task/type/source.type';
 
 export class ApiCredentials {
   @IsNotEmpty()

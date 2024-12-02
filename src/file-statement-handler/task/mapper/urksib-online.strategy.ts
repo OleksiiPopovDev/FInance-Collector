@@ -1,9 +1,9 @@
 import { StrategyInterface } from './strategy.interface';
-import { FieldMapper } from '../../../dto/finance-source';
 import { UkrsibbankOnline } from '../type/ukrsibbank-online.type';
+import { FinanceStatementFieldSchema } from '../../database/schema/finance-statement-field.schema';
 
 export class UrksibOnlineStrategy extends StrategyInterface {
-  run(data: any[]): FieldMapper[] {
+  run(data: any[]): FinanceStatementFieldSchema[] {
     return data.map((row) => {
       const [day, month, year] = row['data_operaciyi']?.split('.').map(Number);
 
@@ -29,7 +29,7 @@ export class UrksibOnlineStrategy extends StrategyInterface {
             : 0,
         currency: mappedOriginSource.currency,
         originSource: mappedOriginSource,
-      } as FieldMapper;
+      } as FinanceStatementFieldSchema;
     });
   }
 }
